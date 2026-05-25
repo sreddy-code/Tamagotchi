@@ -54,6 +54,11 @@ public class Pet {
     public int getEnergy() { return energy; }
     public int getHappiness() { return happiness; }
     public boolean isSick() { return isSick; }
+
+    void setHunger(int hunger) { this.hunger = hunger; }
+    public void setThirst(int thirst) { this.thirst = thirst; }
+    public void setEnergy(int energy) { this.energy = energy; }
+    public void setHappiness(int happiness) { this.happiness = happiness; }
 }
 
 
