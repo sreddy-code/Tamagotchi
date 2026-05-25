@@ -21,6 +21,29 @@ public class ActionHistory {
         }
 
         public void addAction(String action) {
-        Node newNode = new
+            Node newNode = new Node(action);
+            newNode.next = head;
+            head = newNode;
+            size++;
+    }
+
+    public String getRecentActions(int n){
+        String result = "";
+        Node current = head;
+        int count = 0;
+        while (current != null  && count < n) {
+            result += "- " +current.action + "\n";
+            current = current.next;
+            count ++;
+        }
+
+        if (result.equals("")){
+            return "No actions yet!";
+
+        }
+
+        return result;
+
+
     }
 }
