@@ -1,6 +1,6 @@
 
 
-public class ActionHistory {
+public class ActionHistory { //track history ofactions using linkedlist
     private Node head;
     private int size;
 

@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 public class HelloFX extends Application {
     @Override
     public void start(Stage stage) {
-        Label label = new Label("Tamagotchi coming soon :3");
+        Label label = new Label("Tamagotchi coming soon :3 67");
         Scene scene = new Scene(new StackPane(label), 400, 300);
         stage.setScene(scene);
         stage.setTitle("Tamagotchi");

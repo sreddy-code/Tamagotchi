@@ -1,6 +1,6 @@
 import java.util.Stack;
 
-public class ActionStack {
+public class ActionStack { //
         private Stack<String> actions;
 
         public ActionStack() {
