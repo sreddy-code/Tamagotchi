@@ -48,6 +48,14 @@ public class Pet {
         hunger = Math.max(0, hunger - 20);
 
     }
+
+    public void treatSickness() {
+        if (isSick) {
+            isSick = false;
+            happiness = Math.min(100, happiness + 20);
+        }
+    }
+
     public String getName() { return name; }
     public int getHunger() { return hunger; }
     public int getThirst() { return thirst; }

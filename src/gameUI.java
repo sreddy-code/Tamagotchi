@@ -30,7 +30,7 @@ public class gameUI extends Application {
     Label statusLabel = new Label("Your cat is happy!");
     Label historyLabel = new Label("Action history will appear here.");
 
-    public void Start(Stage stage){
+    public void start(Stage stage) {
         Image happyCat = new Image("images/cat_happy.png");
         ImageView catView = new ImageView(happyCat);
         catView.setFitWidth(200);
@@ -62,8 +62,8 @@ public class gameUI extends Application {
                 actionStack.pushAction("feed");
                 actionHistory.addAction("Fed the pet");
                 updateUI();
-                }
-            });
+            }
+        });
 
         waterBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -98,12 +98,29 @@ public class gameUI extends Application {
         treatBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                pet.();//add treat sickness method bc i dont have one
+                pet.treatSickness();//add treat sickness method bc i dont have one
                 actionStack.pushAction("treat");
                 actionHistory.addAction("Treated sickness");
                 updateUI();
             }
         });
+
+    }
+    private void updateUI(){
+        hungerBar.setProgress(pet.getHunger() / 100.0);
+        thirstBar.setProgress(pet.getThirst() / 100.0);
+        happinessBar.setProgress(pet.getHappiness() / 100.0);
+        energyBar.setProgress(pet.getEnergy() / 100.0);
+        historyLabel.setText(actionHistory.getRecentActions(5));
+
+        if (needsQueue.hasNeeds()) {
+            statusLabel.setText("Your pet is " + needsQueue.getNextNeed() + "!");
+        } else {
+            statusLabel.setText("Your pet is happy!");
+        }
+    }
+
+}
 
 
 
