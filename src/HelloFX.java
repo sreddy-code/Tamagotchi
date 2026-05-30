@@ -71,6 +71,8 @@ public class HelloFX extends Application {
         Button treatBtn = new Button("Treat sickness");
         Button undoBtn = new Button("Undo");
 
+        Button muteBtn = new Button("Mute");
+
         //button actions below:
 
         feedBtn.setOnAction(new EventHandler<ActionEvent>() {
@@ -135,13 +137,30 @@ public class HelloFX extends Application {
             }
         });
 
+        muteBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                if (soundManager.isMuted()) {
+                    soundManager.unmute();
+                    muteBtn.setText("Mute");
+                } else {
+                    soundManager.mute();
+                    muteBtn.setText("Unmute");
+                }
+            }
+        });
+
         VBox statBox = new VBox(5, hungerLabel, hungerBar, thirstLabel, thirstBar, happinessLabel,
                 happinessBar, energyLabel, energyBar, tokenLabel); //label & bar container
 
+
         HBox buttonBox = new HBox(10, feedBtn, playBtn, sleepBtn, treatBtn, waterBtn, undoBtn);
+        HBox muteBox = new HBox(muteBtn);
+        muteBox.setStyle("-fx-alignment: center;");
 // where the buttons will display
 
-        VBox mainLayout = new VBox(20, catView, statusLabel, statBox, buttonBox, historyLabel);
+
+        VBox mainLayout = new VBox(20, catView, statusLabel, statBox, buttonBox, muteBox, historyLabel);
         mainLayout.setStyle("-fx-padding:20, -fx-alignment:center;");
         mainLayout.setStyle("-fx-background-color: #fff8f0; -fx-padding: 20; -fx-alignment: center;");
         hungerBar.setStyle("-fx-accent: #f4a7b9;");
@@ -155,6 +174,7 @@ public class HelloFX extends Application {
         sleepBtn.setStyle(btnStyle);
         treatBtn.setStyle(btnStyle);
         undoBtn.setStyle(btnStyle); //changed font to georgia... it's prettier
+        muteBtn.setStyle(btnStyle);
         statusLabel.setStyle("-fx-text-fill: #a0536a; -fx-font-family: Georgia; -fx-font-size: 18;");
         historyLabel.setStyle("-fx-text-fill: #b07080; -fx-font-family: Georgia; -fx-font-size: 12;");
 
