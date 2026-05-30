@@ -15,12 +15,17 @@ import javafx.animation.KeyFrame;
 import javafx.util.Duration;
 import javafx.scene.text.Font;// so we can have nice font
 
+
+
+
 public class HelloFX extends Application {
 
     Pet pet = new Pet("Mochi");
     NeedsQueue needsQueue = new NeedsQueue();
     ActionStack actionStack = new ActionStack();
     ActionHistory actionHistory = new ActionHistory();
+
+    SoundManager soundManager = new SoundManager();
 
     //creating instances of progress bars
     ProgressBar hungerBar = new ProgressBar();
@@ -44,6 +49,8 @@ public class HelloFX extends Application {
         ImageView catView = new ImageView(happyCat);
         catView.setFitWidth(200);
         catView.setFitHeight(200);
+
+        soundManager.playMusic("sounds/cafe_music.mp3");
 
         Label hungerLabel = styledLabel("Hunger");
         Label thirstLabel = styledLabel("Thirst");
@@ -181,6 +188,8 @@ public class HelloFX extends Application {
             statusLabel.setText("Your pet is happy!");
         }
     }
+
+
 
 
 public static void main(String[] args) {
