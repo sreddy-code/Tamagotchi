@@ -117,6 +117,14 @@ public class HelloFX extends Application {
                 updateUI();
             }
         });
+        undoBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                String result = actionStack.undo(pet);
+                actionHistory.addAction("UNDO: " + result);
+                updateUI();
+            }
+        });
 
         VBox statBox = new VBox(5, hungerLabel, hungerBar, thirstLabel, thirstBar, happinessLabel,
                 happinessBar, energyLabel, energyBar); //label & bar container
