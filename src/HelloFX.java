@@ -134,6 +134,20 @@ public class HelloFX extends Application {
 
         VBox mainLayout = new VBox(20, catView, statusLabel, statBox, buttonBox, historyLabel);
         mainLayout.setStyle("-fx-padding:20, -fx-alignment:center;");
+        mainLayout.setStyle("-fx-background-color: #fff8f0; -fx-padding: 20; -fx-alignment: center;");
+        hungerBar.setStyle("-fx-accent: #f4a7b9;");
+        thirstBar.setStyle("-fx-accent: #c9a7f4;");
+        energyBar.setStyle("-fx-accent: #f4c7a7;");
+        happinessBar.setStyle("-fx-accent: #f4a7d4;"); //set to pastels & cream colors
+        String btnStyle = "-fx-background-color: #f9c6d0; -fx-font-family: Georgia; -fx-font-size: 13; -fx-background-radius: 20; -fx-border-radius: 20; -fx-text-fill: #a0536a;";
+        feedBtn.setStyle(btnStyle);
+        waterBtn.setStyle(btnStyle);
+        playBtn.setStyle(btnStyle);
+        sleepBtn.setStyle(btnStyle);
+        treatBtn.setStyle(btnStyle);
+        undoBtn.setStyle(btnStyle); //changed font to georgia... it's prettier
+        statusLabel.setStyle("-fx-text-fill: #a0536a; -fx-font-family: Georgia; -fx-font-size: 18;");
+        historyLabel.setStyle("-fx-text-fill: #b07080; -fx-font-family: Georgia; -fx-font-size: 12;");
 
         Timeline gameLoop = new Timeline(new KeyFrame(Duration.seconds(3), new EventHandler<ActionEvent>() {
             @Override
