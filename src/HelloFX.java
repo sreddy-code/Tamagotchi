@@ -70,6 +70,7 @@ public class HelloFX extends Application {
                 pet.feed();
                 actionStack.pushAction("feed");
                 actionHistory.addAction("Fed the pet");
+                needsQueue.resolveNeed();
                 updateUI();
             }
         });
@@ -80,6 +81,7 @@ public class HelloFX extends Application {
                 pet.giveWater();
                 actionStack.pushAction("giveWater");
                 actionHistory.addAction("Gave water");
+                needsQueue.resolveNeed();
                 updateUI();
             }
         });
@@ -90,6 +92,7 @@ public class HelloFX extends Application {
                 pet.play();
                 actionStack.pushAction("play");
                 actionHistory.addAction("Played with pet");
+                needsQueue.resolveNeed();
                 updateUI();
             }
         });
@@ -100,6 +103,7 @@ public class HelloFX extends Application {
                 pet.sleep();
                 actionStack.pushAction("sleep");
                 actionHistory.addAction("Put pet to sleep");
+                needsQueue.resolveNeed();
                 updateUI();
             }
         });
