@@ -24,6 +24,8 @@ public class HelloFX extends Application {
     NeedsQueue needsQueue = new NeedsQueue();
     ActionStack actionStack = new ActionStack();
     ActionHistory actionHistory = new ActionHistory();
+    Shop shop = new Shop();
+    Label tokenLabel = new Label("Tokens: 0");
 
     SoundManager soundManager = new SoundManager();
 
@@ -134,7 +136,7 @@ public class HelloFX extends Application {
         });
 
         VBox statBox = new VBox(5, hungerLabel, hungerBar, thirstLabel, thirstBar, happinessLabel,
-                happinessBar, energyLabel, energyBar); //label & bar container
+                happinessBar, energyLabel, energyBar, tokenLabel); //label & bar container
 
         HBox buttonBox = new HBox(10, feedBtn, playBtn, sleepBtn, treatBtn, waterBtn, undoBtn);
 // where the buttons will display
@@ -161,6 +163,7 @@ public class HelloFX extends Application {
             public void handle(ActionEvent actionEvent) {
                 pet.decayStats();
                 needsQueue.checkNeeds(pet);
+                shop.earnTokens(pet);
                 updateUI();
             }
         }));
@@ -181,6 +184,7 @@ public class HelloFX extends Application {
         happinessBar.setProgress(pet.getHappiness() / 100.0);
         energyBar.setProgress(pet.getEnergy() / 100.0);
         historyLabel.setText(actionHistory.getRecentActions(5));
+        tokenLabel.setText("Tokens: " + shop.getTokens());
 
         if (needsQueue.hasNeeds()) {
             statusLabel.setText("Your pet is " + needsQueue.getNextNeed() + "!");
