@@ -17,10 +17,10 @@ public class Pet {
     }
 
     public void decayStats() {
-        hunger = Math.max(0, hunger - 5);
-        thirst = Math.max(0, thirst - 7);
-        energy = Math.max(0, energy - 3);
-        happiness = Math.max(0, happiness - 4);
+        hunger = Math.max(0, hunger - 3);
+        thirst = Math.max(0, thirst - 2);
+        energy = Math.max(0, energy - 2);
+        happiness = Math.max(0, happiness - 3);
 
 
         if (hunger == 0 || thirst == 0 || energy == 0) {

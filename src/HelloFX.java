@@ -25,7 +25,8 @@ public class HelloFX extends Application {
     ActionStack actionStack = new ActionStack();
     ActionHistory actionHistory = new ActionHistory();
     Shop shop = new Shop();
-    Label tokenLabel = new Label("Tokens: 0");
+    Label tokenDisplay = new Label("Tokens: " + shop.getTokens());
+
 
     SoundManager soundManager = new SoundManager();
 
@@ -59,6 +60,11 @@ public class HelloFX extends Application {
         Label happinessLabel = styledLabel("Happiness");
         Label energyLabel = styledLabel("Energy");
 
+        hungerLabel.setStyle("-fx-text-fill: #f4a7b9; -fx-font-family: Georgia; -fx-font-size: 14;");
+        thirstLabel.setStyle("-fx-text-fill: #c9a7f4; -fx-font-family: Georgia; -fx-font-size: 14;");
+        happinessLabel.setStyle("-fx-text-fill: #f4a7d4; -fx-font-family: Georgia; -fx-font-size: 14;");
+        energyLabel.setStyle("-fx-text-fill: #f4c7a7; -fx-font-family: Georgia; -fx-font-size: 14;");
+
         hungerBar.setProgress(0.8);
         thirstBar.setProgress(0.8);
         energyBar.setProgress(0.8);
@@ -72,6 +78,8 @@ public class HelloFX extends Application {
         Button undoBtn = new Button("Undo");
 
         Button muteBtn = new Button("Mute");
+
+        Button shopBtn = new Button("Shop");
 
         //button actions below:
 
@@ -150,23 +158,65 @@ public class HelloFX extends Application {
             }
         });
 
-        VBox statBox = new VBox(5, hungerLabel, hungerBar, thirstLabel, thirstBar, happinessLabel,
-                happinessBar, energyLabel, energyBar, tokenLabel); //label & bar container
+        shopBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Stage shopStage = new Stage();
+                shopStage.setTitle("Shop");
+                Label comingSoon = new Label("Shop coming soon!");
+                comingSoon.setStyle("-fx-font-family: Georgia; -fx-font-size: 16; -fx-text-fill: #a0536a;");
+                VBox shopLayout = new VBox(20, comingSoon);
+                shopLayout.setStyle("-fx-background-color: #fff8f0; -fx-padding: 30; -fx-alignment: center;");
+                shopStage.setScene(new Scene(shopLayout, 400, 300));
+                shopStage.show();
+            }
+        });
+        hungerBar.setPrefWidth(200);
+        thirstBar.setPrefWidth(200);
+        happinessBar.setPrefWidth(200);
+        energyBar.setPrefWidth(200);
 
+        HBox hungerRow = new HBox(10, hungerLabel, hungerBar);
+        hungerRow.setStyle("-fx-alignment: center;");
+        HBox thirstRow = new HBox(10, thirstLabel, thirstBar);
+        thirstRow.setStyle("-fx-alignment: center;");
+        HBox happinessRow = new HBox(10, happinessLabel, happinessBar);
+        happinessRow.setStyle("-fx-alignment: center;");
+        HBox energyRow = new HBox(10, energyLabel, energyBar);
+        energyRow.setStyle("-fx-alignment: center;");
 
-        HBox buttonBox = new HBox(10, feedBtn, playBtn, sleepBtn, treatBtn, waterBtn, undoBtn);
+        VBox statBox = new VBox(8, hungerRow, thirstRow, happinessRow, energyRow);
+        statBox.setStyle("-fx-alignment: center;");
+
+        Label historyHeader = new Label("Action History:");
+        historyHeader.setStyle("-fx-text-fill: #a0536a; -fx-font-family: Georgia; -fx-font-size: 12; -fx-font-weight: bold;");
+
+        VBox historyBox = new VBox(4, historyHeader, historyLabel);
+        historyBox.setStyle("-fx-alignment: center; -fx-padding: 10; -fx-border-color: #f4d0da; -fx-border-width: 1 0 0 0;");
+
+        VBox catBox = new VBox(10, catView, statusLabel);
+        catBox.setStyle("-fx-alignment: center;");
+
+        HBox buttonBox = new HBox(8, feedBtn, playBtn, sleepBtn, treatBtn, waterBtn, undoBtn);
+        buttonBox.setStyle("-fx-alignment: center;");
+
         HBox muteBox = new HBox(muteBtn);
         muteBox.setStyle("-fx-alignment: center;");
-// where the buttons will display
 
+        javafx.scene.layout.Region spacer = new javafx.scene.layout.Region();
+        HBox.setHgrow(spacer, javafx.scene.layout.Priority.ALWAYS);
+        HBox topBar = new HBox();
+        topBar.getChildren().addAll(tokenDisplay, spacer, shopBtn);
 
-        VBox mainLayout = new VBox(20, catView, statusLabel, statBox, buttonBox, muteBox, historyLabel);
-        mainLayout.setStyle("-fx-padding:20, -fx-alignment:center;");
+        VBox mainLayout = new VBox(15, topBar, catBox, statBox, buttonBox, muteBox, historyBox);
         mainLayout.setStyle("-fx-background-color: #fff8f0; -fx-padding: 20; -fx-alignment: center;");
-        hungerBar.setStyle("-fx-accent: #f4a7b9;");
-        thirstBar.setStyle("-fx-accent: #c9a7f4;");
-        energyBar.setStyle("-fx-accent: #f4c7a7;");
-        happinessBar.setStyle("-fx-accent: #f4a7d4;"); //set to pastels & cream colors
+
+        hungerBar.setStyle("-fx-accent: #f4a7b9; -fx-background-radius: 10; -fx-pref-height: 20;");
+        thirstBar.setStyle("-fx-accent: #c9a7f4; -fx-background-radius: 10; -fx-pref-height: 20;");
+        happinessBar.setStyle("-fx-accent: #f4a7d4; -fx-background-radius: 10; -fx-pref-height: 20;");
+        energyBar.setStyle("-fx-accent: #f4c7a7; -fx-background-radius: 10; -fx-pref-height: 20;"); //set to pastels & cream colors
+
+
         String btnStyle = "-fx-background-color: #f9c6d0; -fx-font-family: Georgia; -fx-font-size: 13; -fx-background-radius: 20; -fx-border-radius: 20; -fx-text-fill: #a0536a;";
         feedBtn.setStyle(btnStyle);
         waterBtn.setStyle(btnStyle);
@@ -175,8 +225,10 @@ public class HelloFX extends Application {
         treatBtn.setStyle(btnStyle);
         undoBtn.setStyle(btnStyle); //changed font to georgia... it's prettier
         muteBtn.setStyle(btnStyle);
+        shopBtn.setStyle(btnStyle);
         statusLabel.setStyle("-fx-text-fill: #a0536a; -fx-font-family: Georgia; -fx-font-size: 18;");
         historyLabel.setStyle("-fx-text-fill: #b07080; -fx-font-family: Georgia; -fx-font-size: 12;");
+        tokenDisplay.setStyle("-fx-text-fill: #a0536a; -fx-font-family: Georgia; -fx-font-size: 14;");
 
         Timeline gameLoop = new Timeline(new KeyFrame(Duration.seconds(3), new EventHandler<ActionEvent>() {
             @Override
@@ -190,10 +242,21 @@ public class HelloFX extends Application {
         gameLoop.setCycleCount(Timeline.INDEFINITE);
         gameLoop.play();
 
-        Scene scene = new Scene(mainLayout, 500, 600);
+        Scene scene = new Scene(mainLayout, 550, 680);
         stage.setTitle("tamagotchi :3");
         stage.setScene(scene);
         stage.show();
+
+
+
+        hungerBar.lookup(".track").setStyle("-fx-background-radius: 10; -fx-border-radius: 10;");
+        hungerBar.lookup(".bar").setStyle("-fx-background-radius: 10; -fx-border-radius: 10;");
+        thirstBar.lookup(".track").setStyle("-fx-background-radius: 10; -fx-border-radius: 10;");
+        thirstBar.lookup(".bar").setStyle("-fx-background-radius: 10; -fx-border-radius: 10;");
+        happinessBar.lookup(".track").setStyle("-fx-background-radius: 10; -fx-border-radius: 10;");
+        happinessBar.lookup(".bar").setStyle("-fx-background-radius: 10; -fx-border-radius: 10;");
+        energyBar.lookup(".track").setStyle("-fx-background-radius: 10; -fx-border-radius: 10;");
+        energyBar.lookup(".bar").setStyle("-fx-background-radius: 10; -fx-border-radius: 10;");
 
 
 
@@ -204,7 +267,7 @@ public class HelloFX extends Application {
         happinessBar.setProgress(pet.getHappiness() / 100.0);
         energyBar.setProgress(pet.getEnergy() / 100.0);
         historyLabel.setText(actionHistory.getRecentActions(5));
-        tokenLabel.setText("Tokens: " + shop.getTokens());
+        tokenDisplay.setText("Tokens: " + shop.getTokens());
 
         if (needsQueue.hasNeeds()) {
             statusLabel.setText("Your pet is " + needsQueue.getNextNeed() + "!");
