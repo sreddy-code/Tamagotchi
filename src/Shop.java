@@ -7,13 +7,10 @@ public class Shop {
         tokens = 0;
         items = new ArrayList<>();
 
-        items.add(new ShopItem("Bow Hat", 20, "hat"));
-        items.add(new ShopItem("Party Hat", 30, "hat"));
-        items.add(new ShopItem("Witch Hat", 50, "hat"));
 
-        items.add(new ShopItem("Sakura Garden", 40, "background"));
-        items.add(new ShopItem("Starry Night", 60, "background"));
-        items.add(new ShopItem("Dreamscape", 100, "background"));
+        items.add(new ShopItem("Polka Dot", 20, "background"));
+        items.add(new ShopItem("Cloud", 40, "background"));
+        items.add(new ShopItem("Rainbow", 60, "background"));
 
     }
         public void earnTokens(Pet pet) {
